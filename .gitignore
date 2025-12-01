@@ -128,3 +128,4 @@ dmypy.json
 .vscode/
 src/agent_creator/agents/generated/*
 .DS_Store
+trading_agent_from_genesis.mp4
