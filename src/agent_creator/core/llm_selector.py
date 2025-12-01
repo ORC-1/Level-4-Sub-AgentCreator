@@ -18,6 +18,7 @@ def select_llm(
     structured_instruction: Dict[str, Any],
     agent_config: Dict[str, Any]
 ) -> ModelSelection:
+    # TODO: Add support for other models and update prompt
     """
     Use Gemini to select the optimal model configuration.
     This implements "model-of-models" where Gemini helps choose the best setup.
@@ -29,7 +30,7 @@ def select_llm(
     llm = create_llm_client()
     
     prompt = f"""You are an AI model selection expert. Analyze this agent configuration
-and recommend the optimal LLM model.
+and recommend the optimal Google Gemini model.
 
 Agent Type: {structured_instruction['agent_type']}
 Complexity: {structured_instruction.get('estimated_complexity', 'medium')}
@@ -42,13 +43,19 @@ Consider:
 - Specific capability needs (coding, reasoning, analysis)
 - Budget constraints
 
-Recommend ONE model with reasoning in JSON:
+IMPORTANT: You must choose from these Google Gemini models ONLY:
+- gemini-2.0-flash-exp (fastest, cheapest, good for simple tasks)
+- gemini-1.5-flash (balanced, 1M context window)
+- gemini-1.5-pro (most capable, best for complex reasoning)
+- gemini-pro (legacy, general purpose)
+
+Recommend ONE Gemini model with reasoning in JSON:
 {{
-    "model_name": "chosen_model",
-    "context_window": number,
-    "temperature": 0.0-1.0,
-    "reasoning": "why this model",
-    "estimated_cost_per_1k_tokens": number
+    "model_name": "gemini-1.5-flash",
+    "context_window": 1000000,
+    "temperature": 0.7,
+    "reasoning": "why this specific Gemini model",
+    "estimated_cost_per_1k_tokens": 0.00015
 }}"""
     
     try:

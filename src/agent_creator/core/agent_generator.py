@@ -81,7 +81,9 @@ class {agent_name.title().replace('_', '')}Agent:
             raise ValueError("API key required. Set GOOGLE_API_KEY or GEMINI_API_KEY environment variable.")
         
         self.client = genai.Client(api_key=api_key)
-        self.model_name = "{model_name}"
+        # Ensure model name is in correct format (remove 'models/' prefix if present)
+        model_name = "{model_name}"
+        self.model_name = model_name.replace("models/", "") if model_name.startswith("models/") else model_name
     
     def process(self, message: str, context: Optional[Dict[str, Any]] = None) -> str:
         """
