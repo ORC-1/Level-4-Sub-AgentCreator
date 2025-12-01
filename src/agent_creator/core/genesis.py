@@ -1,5 +1,11 @@
 from typing import Dict, Any
-from ..utils.logger import log_event
+from utils.logger import log_event
+from .mdp_converter import convert_query_via_mdp
+from .agent_setup import get_agent_setup_data
+from .llm_selector import select_llm
+from .retry import genesis_retry
+from qa.qa_vet import quality_assurance_test
+from .agent_generator import create_agent_a2a
 
 class ValidationError(Exception):
     """Custom exception for input validation failures"""
@@ -26,25 +32,35 @@ def genesis(instruction: str) -> Dict[str, Any]:
         structured_instruction = convert_query_via_mdp(instruction)
         
         # Process 3: Create agent configuration
-        agent_config = create_agent_setup(structured_instruction)
+        agent_config = get_agent_setup_data(structured_instruction)
         
-        # Process 4: Select and instantiate LLM
-        llm_instance = select_and_instantiate_llm(structured_instruction, agent_config)
+        # Process 4: Select LLM
+        llm_instance = select_llm(structured_instruction, agent_config)
+       
+        # Add selected model to agent config for agent generation
+        agent_config["selected_model"] = llm_instance.model_name
+        agent_config["model_temperature"] = llm_instance.temperature
+        agent_config["model_context_window"] = llm_instance.context_window
         
         # Process 5: Quality assurance via SPICE testing
         qa_result = quality_assurance_test(agent_config, llm_instance, structured_instruction)
-        
+        print("qa_result", qa_result)
         if not qa_result["passed"]:
             log_event("QA_FAILED", 
                      agent_id=agent_config["agent_id"],
                      reason=qa_result["reason"],
                      test_scores=qa_result["scores"])
             
-            # Attempt retry with enhanced instructions
-            return genesis_retry(instruction, qa_result["feedback"])
+            # Attempt retry with enhanced configuration (up to 3 attempts)
+            return genesis_retry(
+                qa_result["feedback"],
+                agent_config,
+                llm_instance,
+                structured_instruction
+            )
         
-        # Process 6: Register with A2A network
-        a2a_registration = register_agent_a2a(agent_config)
+        # Process 6: Create Agent class and Register with A2A network
+        a2a_registration = create_agent_a2a(agent_config)
         
         log_event("GENESIS_SUCCESS",
                  agent_id=agent_config["agent_id"],

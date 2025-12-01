@@ -1,5 +1,5 @@
 import sys
-from .core.genesis import genesis
+from core.genesis import genesis
 
 def create_agent(instruction: str):
     """

@@ -2,7 +2,7 @@ from typing import Dict, Any
 
 def get_agent_setup_data(structured_instruction: Dict[str, Any]) -> Dict[str, Any]:
     """
-    Create initial agent configuration from structured instructions.
+    Create initial agent setup configuration from structured instructions.
     """
     import uuid
     
