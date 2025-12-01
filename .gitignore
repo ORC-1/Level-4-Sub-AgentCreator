@@ -126,3 +126,5 @@ dmypy.json
 # IDEs
 .idea/
 .vscode/
+src/agent_creator/agents/generated/*
+.DS_Store
