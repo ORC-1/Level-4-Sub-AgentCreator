@@ -31,7 +31,7 @@ Genesis operates through a **5-stage pipeline**:
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for detailed technical documentation.
 
-## Deployment & Installation
+## Installation
 
 ```bash
 # Clone the repository
