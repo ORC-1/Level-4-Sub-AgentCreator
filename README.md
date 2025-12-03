@@ -3,7 +3,7 @@
 
 ## Overview
 
-This project contains the core for a self-expanding multi-agent system built to overcome one of the biggest limitation in today's AI ecosystems: static agents that can't evolve. Instead of relying on a fixed set of tools, it listens to a natural-language request, understands the need, and creates the exact agent required in real time.
+Genesis is a Level 4 agent tool built with Gemini and ADK to solve the fundamental flaw of static multi-agent systems. Genesis takes a natural-language request, instantly diagnoses the system need, and dynamically creates the exact specialized agent required to close capability gaps.
 
 ![Sample Agent Creation Flow](trading_agent_from_genesis.gif)
 Using Google's ADK and a five-stage orchestration pipeline, it transforms vague instructions into structured intent, selects the best model for the job, stress-tests the new agent through SPICE self-play, and finally generates an agent file that can join the multi-agent network as a fully operational, A2A-compliant tool.
