@@ -31,7 +31,7 @@ Genesis operates through a **5-stage pipeline**:
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for detailed technical documentation.
 
-## Installation
+## Deployment & Installation
 
 ```bash
 # Clone the repository
@@ -106,7 +106,7 @@ print(response)
 ## Technology Stack
 
 - **Google ADK** - AI Developer Kit for Gemini integration
-- **Python 3.8+** - Core implementation language
+- **Python 3.11.0** - Core implementation language
 - **SPICE Framework** - Self-play evaluation methodology
 - **A2A Protocol** - Agent-to-agent communication standard
 
@@ -126,10 +126,8 @@ print(response)
 
 ## Future Enhancements
 
-- **Local Model Support** - Download and finetune models from Hugging Face for local deployment
-- **Multi-modal Agents** - Vision, audio, and video capabilities
-- **Agent Networks** - Automatic orchestration of agent teams
-- **Real-time Monitoring** - Live performance dashboards
+- **Local Model Support** - Download and finetune models from Hugging Face for local finetuning and deployment
+
 
 
 ## Contributing
