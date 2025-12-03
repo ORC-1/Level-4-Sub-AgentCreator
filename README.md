@@ -10,6 +10,12 @@ Using Google's ADK and a five-stage orchestration pipeline, it transforms vague 
 
 **In simple words**: this system gives AI the ability to reproduce new agents on demand, closing capability gaps, preventing hallucinations, and enabling real enterprise-grade autonomy.
 
+## Problem
+Currently in multi-agent system, sub-agent and tools are mostly static and fixed, relying on predefined agents and tools fixed at launch. The moment an agent encounters a task it wasn’t perfectly designed for, the system either halts, chooses a sub-optimal tool, or worst of all confidently lies (hallucinates) about an incorrect answer. This inability to adapt or self-repair leads to wasted token cost, missed business opportunities, and severely limits enterprise adoption.
+
+## Solution
+This a Level 4 autonomous “Agent-as-a-Tool” system that introduces true self-expansion. Instead of relying on a fixed toolkit, Genesis takes any natural-language styled request for a new system need, converts it into a structured query, and dynamically creates the exact agent required to fulfill the request. Using Markovian decision logic, Genesis detects capability gaps, generates a specialized agent on the fly, configures its resources and mission prompts, performs QA using SPICE approach and deploys it instantly into the multi-agent hive with A2A Support.
+In simple terms: Genesis is the reproductive system of an AI—allowing a multi-agent environment to grow new agents as tools whenever the need arises.
 
 ## Architecture
 
